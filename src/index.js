@@ -1,4 +1,4 @@
-import readFileSync from 'fs'
+import readFileSync from "fs"
 import jsPDF from 'jspdf'
 
 // Load true type fonts
@@ -20,6 +20,29 @@ import jsPDF from 'jspdf'
   jsPDFAPI.events.push(['addFonts', callAddFont]);
 })(jsPDF.API);
 
+window.onload = function() {
+  function toggle(name) {
+    Array.prototype.slice.call(document.getElementsByClassName('tablink')).forEach(function(element) {
+      element.className = element.className.replace(" w3-border-red", "")
+    })
+    Array.prototype.slice.call(document.getElementsByClassName('tab')).forEach(function(element) {
+      element.style.display = "none"
+    })
+    document.getElementById(name + '-tab').getElementsByClassName('tablink')[0].className += " w3-border-red"
+    document.getElementById(name ).style.display = "block";
+  }
+  document.getElementById('project-tab').onclick = function() {
+    toggle('project')
+  }
+  document.getElementById('finds-tab').onclick = function() {
+    toggle('finds')
+  }
+  document.getElementById('settings-tab').onclick = function() {
+    toggle('settings')
+  }
+}
+
+
 document.getElementById('form_submit').onclick = function() {
 
   // Parse input data (from spread sheet, tab separated)
@@ -27,25 +50,30 @@ document.getElementById('form_submit').onclick = function() {
     var lines = document.getElementById('form_input').value.split("\n")
     var i, item
     var items = []
+    var separator = document.getElementById('separator').value.replace("\\t", "\t")
     for (i = 0; i < lines.length; i++) {
       item = (function() {
-        let values = lines[i].trim().split("\t")
-        function strip(index) {
-          return values[index] ? values[index] : ""
+        let values = lines[i].trim().split(separator)
+        function strip(name, def) {
+          var index = document.getElementById('col_' + name).value - 1
+          return values[index] ? values[index] : def
         }
         return {
-          number: strip(0),
-          date: strip(1),
-          parcel: strip(2),
-          trench: strip(3),
-          object: strip(4),
-          context: strip(5),
-          material: strip(6),
-          type: strip(7),
-          comment: strip(8),
+          number: strip('number', ''),
+          date: strip('date', '-'),
+          parcel: strip('parcel', '-'),
+          trench: strip('trench', '-'),
+          object: strip('object', '-'),
+          context: strip('context', '-'),
+          material: strip('material', '-'),
+          type: strip('type', '-'),
+          comment: strip('comment', ''),
         }
       })()
-      if (item.number) items.push(item)
+      console.log(item)
+      if (item.number) {
+        items.push(item)
+      }
     }
     return items
   }()

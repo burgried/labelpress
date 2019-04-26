@@ -2,42 +2,127 @@
 <html>
 <meta charset="utf-8">
 <title>LabelPress</title>
- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <body>
 
   <div class="w3-container">
     <header>
-      <h1>LabelPress</h1>
+      <h1>Archäologische Fundzettel</h1>
     </header>
-
-    <p>
-      <label for="form_pp">Politische Gemeinde</label><br />
-      <input type="text" id="form_pp" class="w3-input w3-border" value="MG Grüngraben">
-    </p>
-    <p>
-      <label for="form_kg">Katastralgemeinde</label><br />
-      <input type="text" id="form_kg" class="w3-input w3-border" value="KG Immergrün">
-    </p>
-    <p>
-      <label for="form_mn">Maßname</label><br />
-      <input type="text" id="form_mn" class="w3-input w3-border" value="Im Grünen Graben">
-    </p>
-    <p>
-      <label for="form_mnr">Maßname-Nr.</label><br />
-      <input type="text" id="form_mnr" class="w3-input w3-border" value="xxxxx.19.01">
-    </p>
-    <p>
-      <label for="form_institution">Institution</label><br />
-      <input type="text" id="form_institution" class="w3-input w3-border" value="DigDeep GmbH">
-    </p>
-
-    <p>
-      <label for="form_input">Fundliste</label><br />
-      <textarea id="form_input" class="w3-input w3-border">123	31.12.2019	42/1	7	-	42	Fe	Nagel	SF1</textarea>
-    </p>
-
-    <p><input type="submit" class="w3-button w3-border w3-green" id="form_submit" value="PDF drucken"></p>
   </div>
+
+  <div class="w3-container">
+
+    <div class="w3-row">
+      <a id="project-tab" class="tab-head" href="#">
+        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red">Maßnahme</div>
+      </a>
+      <a id="finds-tab" class="tab-head" href="#">
+        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Funde</div>
+      </a>
+      <a id="settings-tab" class="tab-head" href="#">
+        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Einstellungen</div>
+      </a>
+    </div>
+
+    <div id="project" class="tab">
+      <header>
+        <h3>Angaben zur Maßnahme</h3>
+      </header>
+      <p>
+        <label for="form_pp">Politische Gemeinde</label><br />
+        <input type="text" id="form_pp" class="w3-input w3-border" value="">
+      </p>
+      <p>
+        <label for="form_kg">Katastralgemeinde</label><br />
+        <input type="text" id="form_kg" class="w3-input w3-border" value="">
+      </p>
+      <p>
+        <label for="form_mn">Maßnahme</label><br />
+        <input type="text" id="form_mn" class="w3-input w3-border" value="">
+      </p>
+      <p>
+        <label for="form_mnr">Maßnahme-Nr.</label><br />
+        <input type="text" id="form_mnr" class="w3-input w3-border" value="">
+      </p>
+      <p>
+        <label for="form_institution">Institution</label><br />
+        <input type="text" id="form_institution" class="w3-input w3-border" value="">
+      </p>
+    </div>
+
+    <div id="finds" class="tab" style="display:none">
+      <header>
+        <h3>Eingabe der Fundliste</h3>
+      </header>
+      <p>Kopieren und Einfügen direkt aus der Tabellenkalkulation.</p>
+      <p>
+        <label for="form_input">Fundliste</label><br />
+        <textarea id="form_input" class="w3-input w3-border" rows="12">123	31.12.2019	42/1	7		42	Fe	Nagel	SF1</textarea>
+      </p>
+    </div>
+
+    <div id="settings" class="tab" style="display:none">
+      <header>
+        <h3>Einstellungen</h3>
+      </header>
+      <p>
+        <label for="separator">Trennzeichen</label><br />
+        <select id="separator" class="w3-input w3-border">
+          <option value="\t">Tabulator (\t)</option>
+          <option value=";">Semikolon (;)</option>
+          <option value=",">Komma (,)</option>
+        </select>
+      </p>
+      <p>Konfiguration der Spalten, mit 1 beginnend. Wert 0 bedeutet deaktiviert.</p>
+      <p>
+        <label for="col_number">Spalte für Fund-Nr.</label><br />
+        <input type="number" id="col_number" class="w3-input w3-border" value="1" min="0">
+      </p>
+      <p>
+        <label for="col_date">Spalte für Datum</label><br />
+        <input type="number" id="col_date" class="w3-input w3-border" value="2" min="0">
+      </p>
+      <p>
+        <label for="col_parcel">Spalte für Parzelle</label><br />
+        <input type="number" id="col_parcel" class="w3-input w3-border" value="3" min="0">
+      </p>
+      <p>
+        <label for="col_trench">Spalte für Schnitt</label><br />
+        <input type="number" id="col_trench" class="w3-input w3-border" value="4" min="0">
+      </p>
+      <p>
+        <label for="col_object">Spalte für Objekt-Nr.</label><br />
+        <input type="number" id="col_object" class="w3-input w3-border" value="5" min="0">
+      </p>
+      <p>
+        <label for="col_context">Spalte für SE-Nr.</label><br />
+        <input type="number" id="col_context" class="w3-input w3-border" value="6" min="0">
+      </p>
+      <p>
+        <label for="col_material">Spalte für Material</label><br />
+        <input type="number" id="col_material" class="w3-input w3-border" value="7" min="0">
+      </p>
+      <p>
+        <label for="col_type">Spalte für Fundbezeichnung</label><br />
+        <input type="number" id="col_type" class="w3-input w3-border" value="8" min="0">
+      </p>
+      <p>
+        <label for="col_comment">Spalte für Anmerkung</label><br />
+        <input type="number" id="col_comment" class="w3-input w3-border" value="9" min="0">
+      </p>
+    </div>
+  </div>
+
+  <div class="w3-container">
+    <p><input type="submit" class="w3-button w3-border w3-red" id="form_submit" value="PDF erzeugen"></p>
+  </div>
+
+  <footer class="w3-container">
+    <p class="w3-text-gray"><a href="https://github.com/burgried/labelpress/" title="">LabelPress</a> Version 1.0.0 | Created with &hearts; by <a href="https://burgried.at/" title="Verein zur Erhaltung und Erforschung der Burg Ried am Riederberg">burgried.at</a></p>
+  </footer>
+
   <script src="src/index.js"></script>
 </body>
 </html>
