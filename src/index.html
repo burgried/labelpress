@@ -8,25 +8,25 @@
 
   <div class="w3-container">
     <header>
-      <h1>Archäologische Fundzettel</h1>
+      <h1 class="tr">Find labels</span></h1>
     </header>
   </div>
 
   <div class="w3-container">
 
     <div class="w3-row">
-      <a id="project-tab" class="tab-head" href="#">
-        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red">Maßnahme</div>
+      <a class="tab" data-target="project" href="#">
+        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red tr">Project</div>
       </a>
-      <a id="finds-tab" class="tab-head" href="#">
-        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Funde</div>
+      <a class="tab" data-target="finds" href="#">
+        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding tr">Finds</div>
       </a>
-      <a id="settings-tab" class="tab-head" href="#">
-        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding">Einstellungen</div>
+      <a class="tab" data-target="settings" href="#">
+        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding tr">Settings</div>
       </a>
     </div>
 
-    <div id="project" class="tab">
+    <div id="project">
       <header>
         <h3>Angaben zur Maßnahme</h3>
       </header>
@@ -52,7 +52,7 @@
       </p>
     </div>
 
-    <div id="finds" class="tab" style="display:none">
+    <div id="finds">
       <header>
         <h3>Eingabe der Fundliste</h3>
       </header>
@@ -63,7 +63,7 @@
       </p>
     </div>
 
-    <div id="settings" class="tab" style="display:none">
+    <div id="settings">
       <header>
         <h3>Einstellungen</h3>
       </header>
@@ -116,13 +116,14 @@
   </div>
 
   <div class="w3-container">
-    <p><input type="submit" class="w3-button w3-border w3-red" id="form_submit" value="PDF erzeugen"></p>
+    <p><button class="w3-button w3-red tr" id="form_submit">Generate PDF</button></p>
   </div>
 
   <footer class="w3-container">
     <p class="w3-text-gray"><a href="https://github.com/burgried/labelpress/" title="">LabelPress</a> Version 1.0.0 | Created with &hearts; by <a href="https://burgried.at/" title="Verein zur Erhaltung und Erforschung der Burg Ried am Riederberg">burgried.at</a></p>
   </footer>
 
-  <script src="src/index.js"></script>
+<script src="./index.js"></script>
+
 </body>
 </html>
