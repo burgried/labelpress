@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <meta charset="utf-8">
 <title>LabelPress</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +8,7 @@
 
   <div class="w3-container">
     <header>
-      <h1 class="tr">Find labels</span></h1>
+      <h1><span lang="de">Archäologische Fundzettel</span></h1>
     </header>
   </div>
 
@@ -16,111 +16,111 @@
 
     <div class="w3-row">
       <a class="tab" data-target="project" href="#">
-        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red tr">Project</div>
+        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding w3-border-red"><span lang="de">Maßnahme</span></div>
       </a>
       <a class="tab" data-target="finds" href="#">
-        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding tr">Finds</div>
+        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding"><span lang="de">Funde</span></div>
       </a>
       <a class="tab" data-target="settings" href="#">
-        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding tr">Settings</div>
+        <div class="w3-third tablink w3-bottombar w3-hover-light-grey w3-padding"><span lang="de">Einstellungen</span></div>
       </a>
     </div>
 
     <div id="project">
       <header>
-        <h3>Angaben zur Maßnahme</h3>
+        <h3><span lang="de">Angaben zur Maßnahme</span></h3>
       </header>
       <p>
-        <label for="form_pp">Politische Gemeinde</label><br />
+        <label for="form_pp"><span lang="de">Politische Gemeinde</span></label><br />
         <input type="text" id="form_pp" class="w3-input w3-border" value="">
       </p>
       <p>
-        <label for="form_kg">Katastralgemeinde</label><br />
+        <label for="form_kg"><span lang="de">Katastralgemeinde</span></label><br />
         <input type="text" id="form_kg" class="w3-input w3-border" value="">
       </p>
       <p>
-        <label for="form_mn">Maßnahme</label><br />
+        <label for="form_mn"><span lang="de">Maßnahme</span></label><br />
         <input type="text" id="form_mn" class="w3-input w3-border" value="">
       </p>
       <p>
-        <label for="form_mnr">Maßnahme-Nr.</label><br />
+        <label for="form_mnr"><span lang="de">Maßnahme-Nr.</span></label><br />
         <input type="text" id="form_mnr" class="w3-input w3-border" value="">
       </p>
       <p>
-        <label for="form_institution">Institution</label><br />
+        <label for="form_institution"><span lang="de">Institution</span></label><br />
         <input type="text" id="form_institution" class="w3-input w3-border" value="">
       </p>
     </div>
 
     <div id="finds">
       <header>
-        <h3>Eingabe der Fundliste</h3>
+        <h3><span lang="de">Eingabe der Fundliste</span></h3>
       </header>
-      <p>Kopieren und Einfügen direkt aus der Tabellenkalkulation.</p>
+      <p><span lang="de">Kopieren und Einfügen direkt aus der Tabellenkalkulation.</span></p>
       <p>
-        <label for="form_input">Fundliste</label><br />
+        <label for="form_input"><span lang="de">Fundliste</span></label><br />
         <textarea id="form_input" class="w3-input w3-border" rows="12">123	31.12.2019	42/1	7		42	Fe	Nagel	SF1</textarea>
       </p>
     </div>
 
     <div id="settings">
       <header>
-        <h3>Einstellungen</h3>
+        <h3><span lang="de">Einstellungen</span></h3>
       </header>
       <p>
-        <label for="separator">Trennzeichen</label><br />
+        <label for="separator"><span lang="de">Trennzeichen</span></label><br />
         <select id="separator" class="w3-input w3-border">
-          <option value="\t">Tabulator (\t)</option>
-          <option value=";">Semikolon (;)</option>
-          <option value=",">Komma (,)</option>
+          <option value="\t"><span lang="de">Tabulator (\t)</span></option>
+          <option value=";"><span lang="de">Semikolon (;)</span></option>
+          <option value=","><span lang="de">Komma (,)</span></option>
         </select>
       </p>
-      <p>Konfiguration der Spalten, mit 1 beginnend. Wert 0 bedeutet deaktiviert.</p>
+      <p><span lang="de">Konfiguration der Spalten, mit 1 beginnend. Wert 0 bedeutet deaktiviert.</span></p>
       <p>
-        <label for="col_number">Spalte für Fund-Nr.</label><br />
+        <label for="col_number"><span lang="de">Spalte für Fund-Nr.</span></label><br />
         <input type="number" id="col_number" class="w3-input w3-border" value="1" min="0">
       </p>
       <p>
-        <label for="col_date">Spalte für Datum</label><br />
+        <label for="col_date"><span lang="de">Spalte für Datum</span></label><br />
         <input type="number" id="col_date" class="w3-input w3-border" value="2" min="0">
       </p>
       <p>
-        <label for="col_parcel">Spalte für Parzelle</label><br />
+        <label for="col_parcel"><span lang="de">Spalte für Parzelle</span></label><br />
         <input type="number" id="col_parcel" class="w3-input w3-border" value="3" min="0">
       </p>
       <p>
-        <label for="col_trench">Spalte für Schnitt</label><br />
+        <label for="col_trench"><span lang="de">Spalte für Schnitt</span></label><br />
         <input type="number" id="col_trench" class="w3-input w3-border" value="4" min="0">
       </p>
       <p>
-        <label for="col_object">Spalte für Objekt-Nr.</label><br />
+        <label for="col_object"><span lang="de">Spalte für Objekt-Nr.</span></label><br />
         <input type="number" id="col_object" class="w3-input w3-border" value="5" min="0">
       </p>
       <p>
-        <label for="col_context">Spalte für SE-Nr.</label><br />
+        <label for="col_context"><span lang="de">Spalte für SE-Nr.</span></label><br />
         <input type="number" id="col_context" class="w3-input w3-border" value="6" min="0">
       </p>
       <p>
-        <label for="col_material">Spalte für Material</label><br />
+        <label for="col_material"><span lang="de">Spalte für Material</span></label><br />
         <input type="number" id="col_material" class="w3-input w3-border" value="7" min="0">
       </p>
       <p>
-        <label for="col_type">Spalte für Fundbezeichnung</label><br />
+        <label for="col_type"><span lang="de">Spalte für Fundbezeichnung</span></label><br />
         <input type="number" id="col_type" class="w3-input w3-border" value="8" min="0">
       </p>
       <p>
-        <label for="col_comment">Spalte für Anmerkung</label><br />
+        <label for="col_comment"><span lang="de">Spalte für Anmerkung</span></label><br />
         <input type="number" id="col_comment" class="w3-input w3-border" value="9" min="0">
       </p>
     </div>
   </div>
 
   <div class="w3-container">
-    <p><button class="w3-button w3-red tr" id="form_submit">Generate PDF</button></p>
+    <p><button class="w3-button w3-red" id="form_submit"><span lang="de">PDF erzeugen</span></button></p>
   </div>
 
   <footer class="w3-container">
-    <p class="w3-text-gray"><a href="https://github.com/burgried/labelpress/" title="">LabelPress</a> Version 1.0.0 | Created with &hearts; by <a href="https://burgried.at/" title="Verein zur Erhaltung und Erforschung der Burg Ried am Riederberg">burgried.at</a></p>
+    <p class="w3-text-gray"><a href="https://github.com/burgried/labelpress/" title="LabelPress">LabelPress</a> Version 1.0.0 | Created with &hearts; by <a href="https://burgried.at/" title="Verein zur Erhaltung und Erforschung der Burg Ried am Riederberg">burgried.at</a></p>
   </footer>
 
 <script src="./index.js"></script>

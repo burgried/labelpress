@@ -51,6 +51,36 @@ function parseInput() {
   return items
 }
 
+function Label() {
+  this.width = 57.0
+  this.height = 77.0
+  this.lineHeight = 8.5
+  this.columns = [21.5, 37.0, 29.3,  21.5]
+}
+
+Label.prototype.drawLines = function(x, y, doc) {
+  var i
+  doc.setLineWidth(0.35)
+  // Rect
+  doc.rect(x, y, this.width, this.height, 'S')
+  doc.setLineWidth(0.22)
+  // Horizontal lines
+  for (i = 1; i < 7; i++) {
+    doc.line(x, y + this.height - (this.lineHeight * i),
+             x + this.width, y + this.height - (this.lineHeight * i))
+  }
+  // Vertical lines
+  for (i = 0; i < this.columns.length; i++) {
+    doc.line(x + this.columns[i], y + this.height - (this.lineHeight * (i + 2)),
+             x + this.columns[i], y + this.height - (this.lineHeight * (i + 3)))
+  }
+}
+
+Label.prototype.render = function(item, x, y, doc) {
+  doc.setDrawColor('black')
+  this.drawLines(x, y, doc)
+};
+
 module.exports.generate = function() {
 
   // Parse input data (from spread sheet, tab separated)
@@ -75,20 +105,28 @@ module.exports.generate = function() {
   var col_1 = 29.3
   var col_2 = 37
 
+  var row_count = 3
+  var col_count = 3
+  var card_count = col_count * row_count
+
+  var marginLeft = 15.0
+  var marginTop = 20.0
+  var padding = 4.0
+
   var i
   var item
-
-  var margin_top
-  var margin_left
+  var pos_y
+  var pos_x
 
   for (i = 0; i < items.length; i++) {
+    var label = new Label()
     item = items[i]
 
-    margin_top = 20 + (Math.floor((i % 9) / 3) * (card_height + 4))
-    margin_left = 15 + ((i % 3) * (card_width + 4))
+    pos_y = marginTop + (Math.floor((i % card_count) / col_count) * (card_height + padding))
+    pos_x = marginLeft + ((i % row_count) * (card_width + padding))
 
     // Put 9 cards on every page
-    if (i != 0 && i % 9 == 0) {
+    if (i != 0 && i % card_count == 0) {
       doc.addPage()
     }
 
@@ -98,87 +136,66 @@ module.exports.generate = function() {
     doc.setFontSize(7)
 
     // Top label
-    doc.text(margin_left+1,margin_top+2.9, "Maßnahme/Nr.")
+    doc.text(pos_x+1,pos_y+2.9, "Maßnahme/Nr.")
 
     doc.setFontSize(10)
 
     // Address
-    doc.text(margin_left+1,margin_top+7.3, document.getElementById('form_pp').value)
-    doc.text(margin_left+1,margin_top+12, document.getElementById('form_kg').value)
+    doc.text(pos_x+1,pos_y+7.3, document.getElementById('form_pp').value)
+    doc.text(pos_x+1,pos_y+12, document.getElementById('form_kg').value)
 
     doc.setFontType('bold')
 
     // Project
-    doc.text(margin_left+1,margin_top+16.5, document.getElementById('form_mn').value)
+    doc.text(pos_x+1,pos_y+16.5, document.getElementById('form_mn').value)
 
     doc.setFontSize(14)
 
     // Project ID
-    doc.text(margin_left+1,margin_top+22.5, document.getElementById('form_mnr').value)
+    doc.text(pos_x+1,pos_y+22.5, document.getElementById('form_mnr').value)
 
     doc.setFontType('normal')
     doc.setFontSize(7)
 
     // Left column labels
-    doc.text(margin_left+1,margin_top+card_height-(line_height*1)+2.7, "Fund-Nr.")
-    doc.text(margin_left+1,margin_top+card_height-(line_height*2)+2.7, "Anmerkung")
-    doc.text(margin_left+1,margin_top+card_height-(line_height*3)+2.7, "Material")
-    doc.text(margin_left+1,margin_top+card_height-(line_height*4)+2.7, "Fläche-Nr.")
-    doc.text(margin_left+1,margin_top+card_height-(line_height*5)+2.7, "Datum")
-    doc.text(margin_left+1,margin_top+card_height-(line_height*6)+2.7, "Grundstück-Nr.")
+    var keys, values
+    keys = ['Fund-Nr.', 'Anmerkung', 'Material', 'Fläche-Nr.', 'Datum', 'Grundstück-Nr.']
+    var j
+    for (j = 0; j < keys.length; j++) {
+      doc.text(pos_x + 1.0, pos_y + label.height - (label.lineHeight * (j + 1)) + 2.7, keys[j])
+    }
 
     // Right column labels
-    doc.text(margin_left+col_0+1,margin_top+card_height-(line_height*3)+2.7, "Fundbezeichnung")
-    doc.text(margin_left+col_2+1,margin_top+card_height-(line_height*4)+2.7, "SE-Nr.")
-    doc.text(margin_left+col_1+1,margin_top+card_height-(line_height*5)+2.7, "Objekt-Nr.")
-    doc.text(margin_left+col_0+1,margin_top+card_height-(line_height*6)+2.7, "Institution")
-
+    keys = ['Fundbezeichnung', 'SE-Nr.', 'Objekt-Nr.', 'Institution']
+    for (j = 0; j < keys.length; j++) {
+      doc.text(pos_x + label.columns[j] + 1.0 , pos_y + label.height-(label.lineHeight * (j + 3)) + 2.7, keys[j])
+    }
     doc.setFontType('normal')
     doc.setFontSize(10)
 
     // Left column values
-    doc.text(margin_left+card_width-1.5, margin_top+card_height-(line_height*6)+6.5, document.getElementById('form_institution').value, 'right')
-    doc.text(margin_left+card_width-1.5, margin_top+card_height-(line_height*5)+6.5, item.object, 'right')
-    doc.text(margin_left+card_width-1.5, margin_top+card_height-(line_height*4)+6.5, item.context, 'right')
-    doc.text(margin_left+card_width-1.5, margin_top+card_height-(line_height*3)+6.5, item.type, 'right')
+    doc.text(pos_x+card_width-1.5, pos_y+card_height-(line_height*6)+6.5, document.getElementById('form_institution').value, 'right')
+    doc.text(pos_x+card_width-1.5, pos_y+card_height-(line_height*5)+6.5, item.object, 'right')
+    doc.text(pos_x+card_width-1.5, pos_y+card_height-(line_height*4)+6.5, item.context, 'right')
+    doc.text(pos_x+card_width-1.5, pos_y+card_height-(line_height*3)+6.5, item.type, 'right')
 
     // Right column values
-    doc.text(margin_left+col_0-1.5, margin_top+card_height-(line_height*6)+6.5, item.parcel, 'right')
-    doc.text(margin_left+col_1-1.5, margin_top+card_height-(line_height*5)+6.5, item.date, 'right')
-    doc.text(margin_left+col_2-1.5, margin_top+card_height-(line_height*4)+6.5, item.trench, 'right')
-    doc.text(margin_left+col_0-1.5, margin_top+card_height-(line_height*3)+6.5, item.material, 'right')
+    doc.text(pos_x+col_0-1.5, pos_y+card_height-(line_height*6)+6.5, item.parcel, 'right')
+    doc.text(pos_x+col_1-1.5, pos_y+card_height-(line_height*5)+6.5, item.date, 'right')
+    doc.text(pos_x+col_2-1.5, pos_y+card_height-(line_height*4)+6.5, item.trench, 'right')
+    doc.text(pos_x+col_0-1.5, pos_y+card_height-(line_height*3)+6.5, item.material, 'right')
 
     // Comment
-    doc.text(margin_left+card_width-1.5,margin_top+card_height-(line_height*2)+6.5, item.comment, {align: 'right', maxWidth: card_width-5})
+    doc.text(pos_x+card_width-1.5,pos_y+card_height-(line_height*2)+6.5, item.comment, {align: 'right', maxWidth: card_width-5})
 
     doc.setFontSize(20)
 
     // Find number
-    doc.text(margin_left+card_width-2, margin_top+card_height-1.8, item.number, 'right')
+    doc.text(pos_x+card_width-2, pos_y+card_height-1.8, item.number, 'right')
 
-    doc.setLineWidth(0.35)
-    doc.setDrawColor(0)
-
-    // Card rect
-    doc.rect(margin_left, margin_top, card_width, card_height, 'S')
-
-    doc.setLineWidth(0.22)
-
-    // Horizontal lines
-    doc.line(margin_left, margin_top+card_height-line_height, margin_left+card_width, margin_top+card_height-line_height)
-    doc.line(margin_left, margin_top+card_height-(line_height*2), margin_left+card_width, margin_top+card_height-(line_height*2))
-    doc.line(margin_left, margin_top+card_height-(line_height*3), margin_left+card_width, margin_top+card_height-(line_height*3))
-    doc.line(margin_left, margin_top+card_height-(line_height*4), margin_left+card_width, margin_top+card_height-(line_height*4))
-    doc.line(margin_left, margin_top+card_height-(line_height*5), margin_left+card_width, margin_top+card_height-(line_height*5))
-    doc.line(margin_left, margin_top+card_height-(line_height*6), margin_left+card_width, margin_top+card_height-(line_height*6))
-
-    // Vertical lines
-    doc.line(margin_left+col_0, margin_top+card_height-(line_height*5), margin_left+col_0, margin_top+card_height-(line_height*6))
-    doc.line(margin_left+col_1, margin_top+card_height-(line_height*4), margin_left+col_1, margin_top+card_height-(line_height*5))
-    doc.line(margin_left+col_2, margin_top+card_height-(line_height*3), margin_left+col_2, margin_top+card_height-(line_height*4))
-    doc.line(margin_left+col_0, margin_top+card_height-(line_height*2), margin_left+col_0, margin_top+card_height-(line_height*3))
+    label.render(item, pos_x, pos_y, doc)
   }
 
   // Write output
-  doc.output('dataurlnewwindow')
+  doc.output('dataurlnewwindow');
 }

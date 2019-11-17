@@ -1,5 +1,5 @@
 import {generate} from './pdf.js'
-import {find, get, i18n} from './util.js'
+import {find, get} from './util.js'
 
 function registerTabs(id) {
   function hideTabs(id) {
@@ -26,24 +26,4 @@ window.onload = function() {
   get('#form_submit').onclick = function() {
     generate()
   }
-
-  // i18n translate
-  var messages = {
-    'Find labels': {
-      'de': 'Archäologische Fundzettel'
-    },
-    'Project': {
-      'de': 'Maßnahme'
-    },
-    'Finds': {
-      'de': 'Funde'
-    },
-    'Settings': {
-      'de': 'Einstellungen'
-    },
-    'Generate PDF': {
-      'de': 'PDF erzeugen'
-    }
-  }
-  i18n(messages)
 }
