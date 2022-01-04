@@ -1,23 +1,23 @@
-import readFileSync from "fs"
-import jsPDF from 'jspdf'
+import {readFileSync} from 'fs'
+import {jsPDF} from 'jspdf'
 
 // Load true type fonts
-(function (jsPDFAPI) {
-  var font = readFileSync('fonts/LiberationSans-Regular.ttf', "base64");
+(function (api) {
+  var font = readFileSync('./fonts/LiberationSans-Regular.ttf', 'base64');
   var callAddFont = function () {
-    this.addFileToVFS('LiberationSans-normal.ttf', font);
-    this.addFont('LiberationSans-normal.ttf', 'LiberationSans', 'normal');
+    this.addFileToVFS('LiberationSans-Regular.ttf', font);
+    this.addFont('LiberationSans-Regular.ttf', 'LiberationSans', 'normal');
   };
-  jsPDFAPI.events.push(['addFonts', callAddFont]);
+  api.events.push(['addFonts', callAddFont]);
 })(jsPDF.API);
 
-(function (jsPDFAPI) {
-  var font = readFileSync('fonts/LiberationSans-Bold.ttf', "base64");
+(function (api) {
+  var font = readFileSync('./fonts/LiberationSans-Bold.ttf', 'base64');
   var callAddFont = function () {
     this.addFileToVFS('LiberationSans-Bold.ttf', font);
     this.addFont('LiberationSans-Bold.ttf', 'LiberationSans', 'bold');
   };
-  jsPDFAPI.events.push(['addFonts', callAddFont]);
+  api.events.push(['addFonts', callAddFont]);
 })(jsPDF.API);
 
 function parseInput() {
@@ -131,8 +131,7 @@ module.exports.generate = function() {
     }
 
     // Set default font
-    doc.setFont('LiberationSans')
-    doc.setFontType('normal')
+    doc.setFont('LiberationSans', 'normal', 'normal')
     doc.setFontSize(7)
 
     // Top label
@@ -144,7 +143,7 @@ module.exports.generate = function() {
     doc.text(pos_x+1,pos_y+7.3, document.getElementById('form_pp').value)
     doc.text(pos_x+1,pos_y+12, document.getElementById('form_kg').value)
 
-    doc.setFontType('bold')
+    doc.setFont('LiberationSans', 'normal', 'bold')
 
     // Project
     doc.text(pos_x+1,pos_y+16.5, document.getElementById('form_mn').value)
@@ -154,7 +153,7 @@ module.exports.generate = function() {
     // Project ID
     doc.text(pos_x+1,pos_y+22.5, document.getElementById('form_mnr').value)
 
-    doc.setFontType('normal')
+    doc.setFont('LiberationSans', 'normal', 'normal')
     doc.setFontSize(7)
 
     // Left column labels
@@ -170,7 +169,7 @@ module.exports.generate = function() {
     for (j = 0; j < keys.length; j++) {
       doc.text(pos_x + label.columns[j] + 1.0 , pos_y + label.height-(label.lineHeight * (j + 3)) + 2.7, keys[j])
     }
-    doc.setFontType('normal')
+    doc.setFont('LiberationSans', 'normal', 'normal')
     doc.setFontSize(10)
 
     // Left column values

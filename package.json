@@ -1,8 +1,7 @@
 {
   "name": "labelpress",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Creating labels for archaeological finds",
-  "main": "src/index.html",
   "repository": "https://github.com/burgried/labelpress.git",
   "author": "Bernhard Arnold <bernhard.arnold@burgried.at>",
   "license": "GPL-3.0-or-later",
@@ -13,9 +12,9 @@
   },
   "dependencies": {
     "generate": "^0.14.0",
-    "jspdf": "^1.5.3"
+    "jspdf": "^2.5.0"
   },
   "devDependencies": {
-    "parcel": "^1.12.3"
+    "parcel": "^2.0.1"
   }
 }
