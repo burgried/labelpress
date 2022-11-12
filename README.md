@@ -9,6 +9,14 @@ yarn install
 yarn run dev
 ```
 
+## Bundling
+
+Use parcel for bundling, make sure to set the public path according to the deployment location.
+
+```bash
+parcel build --public-url /
+```
+
 ## License
 
 The source code of labelpress (with exception of fonts) is licensed under a GNU General Public License v3.0.
